@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { allCities } from './data/cities'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import Product from './pages/Product'
@@ -6,11 +8,10 @@ import PageNotFound from './pages/PageNotFound'
 import AppLayout from './pages/AppLayout'
 import Login from './pages/Login'
 import CityList from './components/CityList'
-import { useState } from 'react'
-import { allCities } from './data/cities'
+import CountryList from './components/CountryList'
 
 function App() {
-  const [cities, setCities] = useState(allCities)
+  const [cities] = useState(allCities)
 
   return (
     <Router>
@@ -22,7 +23,7 @@ function App() {
         <Route path='/app' element={<AppLayout />}>
           <Route index element={<CityList cities={cities} />} />
           <Route path='cities' element={<CityList cities={cities} />} />
-          <Route path='countries' element={<p>Countries</p>} />
+          <Route path='countries' element={<CountryList cities={cities} />} />
           <Route path='form' element={<p>Form</p>} />
         </Route>
         <Route path='*' element={<PageNotFound />} />

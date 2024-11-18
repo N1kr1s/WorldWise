@@ -35,6 +35,7 @@ export const allCities = [
       "lng": 13.376933665713324
     },
     "id": 98443197
-  }
+  },
+
 ]
 
