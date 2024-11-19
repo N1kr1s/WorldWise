@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { allCities } from './data/cities'
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,27 +14,28 @@ import CityList from './components/CityList'
 import CountryList from './components/CountryList'
 import City from './components/City'
 import Form from './components/Form'
+import { CitiesProvider } from './contexts/CitiesContext'
 
 function App() {
-  const [cities] = useState(allCities)
-
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Homepage />} />
-        <Route path='product' element={<Product />} />
-        <Route path='pricing' element={<Pricing />} />
-        <Route path='login' element={<Login />} />
-        <Route path='app' element={<AppLayout />}>
-          <Route index element={<Navigate replace to='cities' />} />
-          <Route path='cities' element={<CityList cities={cities} />} />
-          <Route path='countries' element={<CountryList cities={cities} />} />
-          <Route path='cities/:id' element={<City />} />
-          <Route path='form' element={<Form />} />
-        </Route>
-        <Route path='*' element={<PageNotFound />} />
-      </Routes>
-    </Router>
+    <CitiesProvider>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='product' element={<Product />} />
+          <Route path='pricing' element={<Pricing />} />
+          <Route path='login' element={<Login />} />
+          <Route path='app' element={<AppLayout />}>
+            <Route index element={<Navigate replace to='cities' />} />
+            <Route path='cities' element={<CityList cities={cities} />} />
+            <Route path='countries' element={<CountryList cities={cities} />} />
+            <Route path='cities/:id' element={<City />} />
+            <Route path='form' element={<Form />} />
+          </Route>
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
+      </Router>
+    </CitiesProvider>
   )
 }
 
