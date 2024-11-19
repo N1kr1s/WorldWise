@@ -1,15 +1,29 @@
-import { createContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { allCities } from '../data/cities'
 const CitiesContext = createContext()
 
 function CitiesProvider({ children }) {
   const [cities] = useState(allCities)
+  const [currentCity, setCurrentCity] = useState({})
+
+  const getCity = (id) => {
+    setCurrentCity(cities.find((city) => city.id === parseInt(id)))
+  }
 
   return (
-    <CitiesContext.Provider value={{ cities }}>
+    <CitiesContext.Provider value={{ cities, currentCity, getCity }}>
       {children}
     </CitiesContext.Provider>
   )
 }
 
-export { CitiesProvider }
+function useCities() {
+  const context = useContext(CitiesContext)
+  if (context === undefined) {
+    throw new Error('useCities must be used within a CitiesProvider')
+  }
+  return context
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export { CitiesProvider, useCities }

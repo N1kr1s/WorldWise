@@ -1,8 +1,11 @@
 import { useMemo } from 'react'
 import CountryItem from './CountryItem'
 import styles from './CountryList.module.css'
+import { useCities } from '../contexts/CitiesContext'
 
-function CountryList({ cities }) {
+function CountryList() {
+  const { cities } = useCities()
+
   const countries = useMemo(
     () =>
       cities
