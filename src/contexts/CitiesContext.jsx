@@ -3,15 +3,19 @@ import { allCities } from '../data/cities'
 const CitiesContext = createContext()
 
 function CitiesProvider({ children }) {
-  const [cities] = useState(allCities)
+  const [cities, setCities] = useState(allCities)
   const [currentCity, setCurrentCity] = useState({})
 
   const getCity = (id) => {
     setCurrentCity(cities.find((city) => city.id === parseInt(id)))
   }
 
+  const addCity = (newCity) => {
+    setCities((cities) => [...cities, newCity])
+  }
+
   return (
-    <CitiesContext.Provider value={{ cities, currentCity, getCity }}>
+    <CitiesContext.Provider value={{ cities, currentCity, getCity, addCity }}>
       {children}
     </CitiesContext.Provider>
   )
