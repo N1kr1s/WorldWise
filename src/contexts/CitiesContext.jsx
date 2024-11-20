@@ -14,8 +14,14 @@ function CitiesProvider({ children }) {
     setCities((cities) => [...cities, newCity])
   }
 
+  const removeCity = (id) => {
+    setCities((cities) => cities.filter((city) => city.id !== id))
+  }
+
   return (
-    <CitiesContext.Provider value={{ cities, currentCity, getCity, addCity }}>
+    <CitiesContext.Provider
+      value={{ cities, currentCity, getCity, addCity, removeCity }}
+    >
       {children}
     </CitiesContext.Provider>
   )
