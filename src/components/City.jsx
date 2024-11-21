@@ -14,11 +14,11 @@ const formatDate = (date) =>
 
 function City() {
   const { id } = useParams()
-  const { getCity, currentCity } = useCities()
+  const { dispatch, currentCity } = useCities()
   // TEMP DATA
 
   useEffect(() => {
-    getCity(id)
+    dispatch({ type: 'GET_CITY', payload: id })
   }, [id])
 
   const { cityName, emoji, date, notes } = currentCity

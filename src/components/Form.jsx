@@ -32,7 +32,7 @@ function Form() {
   const [notes, setNotes] = useState('')
   const [emoji, setEmoji] = useState('')
   const [geocodingError, setGeocodingError] = useState('')
-  const { addCity } = useCities()
+  const { dispatch } = useCities()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -72,7 +72,8 @@ function Form() {
       position: { lat, lng },
       id: Date.now(),
     }
-    addCity(newCity)
+
+    dispatch({ type: 'ADD_CITY', payload: newCity })
 
     setCityName('')
     setCountry('')

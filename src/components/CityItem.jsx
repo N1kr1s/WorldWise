@@ -10,7 +10,7 @@ const formatDate = (date) =>
   }).format(new Date(date))
 
 function CityItem({ city }) {
-  const { currentCity, removeCity } = useCities()
+  const { currentCity, dispatch } = useCities()
   const { cityName, emoji, date, id, position } = city
 
   return (
@@ -28,7 +28,7 @@ function CityItem({ city }) {
           className={styles.deleteBtn}
           onClick={(e) => {
             e.preventDefault()
-            removeCity(id)
+            dispatch({ type: 'REMOVE_CITY', payload: id })
           }}
         >
           &times;

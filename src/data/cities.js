@@ -5,7 +5,7 @@ export const allCities = [
     "country": "Portugal",
     "emoji": "🇵🇹",
     "date": "2027-10-31T15:59:59.138Z",
-    "notes": "My favorite city so far!",
+    "notes": "cool city",
     "position": {
       "lat": 38.727881642324164,
       "lng": -9.140900099907554
