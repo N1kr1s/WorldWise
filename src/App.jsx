@@ -22,7 +22,7 @@ function App() {
   return (
     <AuthProvider>
       <CitiesProvider>
-        <Router>
+        <Router basename='/WorldWise'>
           <Routes>
             <Route path='/' element={<Homepage />} />
             <Route path='product' element={<Product />} />
