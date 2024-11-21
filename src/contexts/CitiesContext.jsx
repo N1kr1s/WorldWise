@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState } from 'react'
+import { createContext, useContext, useReducer, useEffect } from 'react'
 import { allCities } from '../data/cities'
 const CitiesContext = createContext()
 
@@ -29,8 +29,17 @@ const initialState = {
   currentCity: {},
 }
 
+const initializer = (initialState) => {
+  const localState = localStorage.getItem('localState')
+  return localState ? JSON.parse(localState) : initialState
+}
+
 function CitiesProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState, initializer)
+
+  useEffect(() => {
+    localStorage.setItem('localState', JSON.stringify(state))
+  }, [state])
 
   return (
     <CitiesContext.Provider value={{ ...state, dispatch }}>
